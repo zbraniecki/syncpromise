@@ -1,0 +1,32 @@
+{
+  "name": "syncpromise",
+  "version": "1.0.0",
+  "description": "Sync drop-in replacement for Promise",
+  "main": "./src/syncpromise.js",
+  "directories": {
+    "example": "example",
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zbraniecki/syncpromise.git"
+  },
+  "keywords": [
+    "promise",
+    "sync"
+  ],
+  "author": "Zibi Braniecki (gandalf@mozilla.com)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/zbraniecki/syncpromise/issues"
+  },
+  "homepage": "https://github.com/zbraniecki/syncpromise#readme"
+}
