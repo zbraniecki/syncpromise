@@ -30,6 +30,13 @@ describe('SyncPromise.prototype.then', function() {
     assert.strictEqual(p.value, 'foo2');
   });
 
+  it('should return a promise with a value of the promise if then doesn not return anything', function() {
+    const p = new SyncPromise((resolve) => {resolve('foo')}).then(
+      () => {});
+    assert.strictEqual(p.state, 'fulfilled');
+    assert.strictEqual(p.value, 'foo');
+  });
+
   it('should return a promise with a reason of the original promise if rejected', function() {
     const p = new SyncPromise((resolve, reject) => {reject('foo')}).then(
       () => {return 'foo2'});

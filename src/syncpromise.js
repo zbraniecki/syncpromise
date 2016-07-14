@@ -53,10 +53,12 @@ class SyncPromise {
     if (isPromise(ret)) {
       return ret;
     }
-    if (this.state === STATE.FULFILLED) {
-      this.value = ret;
-    } else {
-      this.reason = ret;
+    if (typeof ret !== 'undefined') {
+      if (this.state === STATE.FULFILLED) {
+        this.value = ret;
+      } else {
+        this.reason = ret;
+      }
     }
     return this;
   }
