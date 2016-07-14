@@ -1,6 +1,6 @@
 const SyncPromise = require('../src/syncpromise');
 
-var assert = require('chai').assert;
+const assert = require('chai').assert;
 
 describe('SyncPromise.all', function() {
   it('should return a SyncPromise with a list of values when succeeded', function() {

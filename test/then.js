@@ -1,6 +1,6 @@
 const SyncPromise = require('../src/syncpromise');
 
-var assert = require('chai').assert;
+const assert = require('chai').assert;
 
 describe('SyncPromise.prototype.then', function() {
   it('should return an original promise if then is empty', function() {

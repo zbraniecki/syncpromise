@@ -1,6 +1,6 @@
 const SyncPromise = require('../src/syncpromise');
 
-var assert = require('chai').assert;
+const assert = require('chai').assert;
 
 describe('SyncPromise.prototype.then -> new SyncPromise', function() {
   it('should return then\'s resolve value if then resolves', function() {

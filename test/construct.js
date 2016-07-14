@@ -1,6 +1,7 @@
 const SyncPromise = require('../src/syncpromise');
 
-var assert = require('chai').assert;
+const assert = require('chai').assert;
+
 describe('new SyncPromise', function() {
   it('should error when called without an argument', function() {
     assert.throws(() => {

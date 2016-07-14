@@ -63,7 +63,7 @@ class SyncPromise {
 }
 
 SyncPromise.resolve = function(val) {
-  return new SyncPromise((resolve, reject) => {
+  return new SyncPromise(resolve => {
     resolve(val);
   });
 }
