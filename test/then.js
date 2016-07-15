@@ -30,11 +30,11 @@ describe('SyncPromise.prototype.then', function() {
     assert.strictEqual(p.value, 'foo2');
   });
 
-  it('should return a promise with a value of the promise if then doesn not return anything', function() {
+  it('should return a new promise with an empty value if then does not return anything', function() {
     const p = new SyncPromise((resolve) => {resolve('foo')}).then(
       () => {});
     assert.strictEqual(p.state, 'fulfilled');
-    assert.strictEqual(p.value, 'foo');
+    assert.strictEqual(p.value, undefined);
   });
 
   it('should return a promise with a reason of the original promise if rejected', function() {
@@ -48,8 +48,8 @@ describe('SyncPromise.prototype.then', function() {
     const p = new SyncPromise((resolve, reject) => {reject('foo')}).then(
       () => {return 'foo2'},
       () => {return 'faa'});
-    assert.strictEqual(p.state, 'rejected');
-    assert.strictEqual(p.reason, 'faa');
+    assert.strictEqual(p.state, 'fulfilled');
+    assert.strictEqual(p.value, 'faa');
   });
 
   it('should pass a value to then when resolved', function() {
@@ -84,5 +84,15 @@ describe('SyncPromise.prototype.then', function() {
         notCalled = false; 
       });
     assert.strictEqual(notCalled, true);
+  });
+
+  it('should not pick a value from a then resolved value', function() {
+    const interactive = new SyncPromise((resolve) => {
+      resolve('value');
+    });
+
+    interactive.then(() => {return 'new value';});
+
+    assert.strictEqual(interactive.value, 'value');
   });
 });

@@ -9,12 +9,6 @@ describe('new SyncPromise', function() {
     }, 'Not enough arguments to Promise.');
   });
 
-  it('should error when called with an argument that is not an object', function() {
-    assert.throws(() => {
-      new SyncPromise('foo');
-    }, 'Argument 1 of Promise.constructor is not an object.');
-  });
-
   it('should error when called with an argument that is not callable', function() {
     assert.throws(() => {
       new SyncPromise({});

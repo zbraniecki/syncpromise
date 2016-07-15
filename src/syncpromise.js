@@ -13,10 +13,7 @@ class SyncPromise {
     if (fn === null) {
       throw new TypeError('Not enough arguments to Promise.');
     }
-    if (!(fn instanceof Object)) {
-      throw new TypeError('Argument 1 of Promise.constructor is not an object.')
-    }
-    if (!(fn instanceof Function)) {
+    if (typeof fn !== 'function') {
       throw new TypeError('Argument 1 of Promise.constructor is not callable.')
     }
     this.state = STATE.PENDING;
@@ -35,32 +32,31 @@ class SyncPromise {
       this.state = STATE.REJECTED;
       this.reason = err;
     };
+
     fn(resolve, reject);
+
     if (this.state === STATE.PENDING) {
       throw new Error('Callback must resolve the promise before returning.');
     }
   }
 
-  then(fn = null, err = null) {
-    const cb =
-      this.state === STATE.FULFILLED ? fn : err;
-    if (cb === null) {
-      return this;
-    }
-    const arg = this.state === STATE.FULFILLED ? this.value : this.reason;
+  then(cb = null, err = null) {
+    return new SyncPromise((resolve, reject) => {
+      const fn = this.state === STATE.FULFILLED ? cb : err;
+      const res = this.state === STATE.FULFILLED ? resolve : reject;
+      const val = this.state === STATE.FULFILLED ? this.value : this.reason;
 
-    const ret = cb(arg);
-    if (isPromise(ret)) {
-      return ret;
-    }
-    if (typeof ret !== 'undefined') {
-      if (this.state === STATE.FULFILLED) {
-        this.value = ret;
+      if (fn === null) {
+        res(val);
       } else {
-        this.reason = ret;
+        const ret = fn(val);
+        if (isPromise(ret)) {
+          ret.then(resolve, reject);
+        } else {
+          resolve(ret);
+        }
       }
-    }
-    return this;
+    });
   }
 }
 
