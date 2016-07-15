@@ -1,6 +1,6 @@
 {
   "name": "syncpromise",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Sync drop-in replacement for Promise",
   "main": "./src/syncpromise.js",
   "directories": {
